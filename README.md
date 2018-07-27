@@ -1,24 +1,11 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a simple rails app that connects to Venmos's public transaction API. (https://venmo.com/api/v5/public)
 
-Things you may want to cover:
+By default, the app connects to API every minute and retrieves the latest 20 transactions. Then it parses the messages of those transactions, looking specifically for emoji.
 
-* Ruby version
+Once you run it, the database will start populating and you can see stats. The index shows the top 10 emoji and but you can also look at daily trends by going to exampleurl.com/🍕.
 
-* System dependencies
+### Limitations
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Emoji are tough. Right now, the emoji parser uses [Emoji Data][https://github.com/mroth/emoji_data.rb], which currently only supports an older version of the Unicode spec.
