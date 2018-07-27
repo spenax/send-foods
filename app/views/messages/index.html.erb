@@ -1,0 +1,17 @@
+<table>
+  <tr>
+  <th>Emoji</th>
+  <th>Count</th>
+  </tr>
+
+  <% @emoji_list.each do |emoji| %>
+    <tr>
+      <td>
+        <%= emoji[0] %>
+      </td>
+      <td>
+        <%= emoji[1] %>
+      </td>
+    </tr>
+  <% end %>
+</table>
