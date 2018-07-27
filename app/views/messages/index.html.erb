@@ -1,13 +1,14 @@
-<table>
+<h1> Top Venmo Transactions</h1>
+<table class="table table-striped">
   <tr>
-  <th>Emoji</th>
-  <th>Count</th>
+  <th scope="col">Emoji</th>
+  <th scope="col">Count</th>
   </tr>
 
   <% @emoji_list.each do |emoji| %>
     <tr>
       <td>
-        <%= emoji[0] %>
+        <%= link_to emoji[0], :controller => "messages", :action => "show", :emoji => emoji[0]  %>
       </td>
       <td>
         <%= emoji[1] %>
