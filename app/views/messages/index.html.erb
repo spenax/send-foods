@@ -1,11 +1,15 @@
-<h1> Top Venmo Transactions</h1>
+
+
+<div class="col-lg-6 offset-lg-3">
+<h2> Top Venmo Transactions <br>(Past Hour)</h2>
 <table class="table table-striped">
   <tr>
   <th scope="col">Emoji</th>
   <th scope="col">Count</th>
+  <th scope="col">Trending</th>
   </tr>
 
-  <% @emoji_list.each do |emoji| %>
+  <% @hourly_list.each_with_index do |emoji, i| %>
     <tr>
       <td>
         <%= link_to emoji[0], :controller => "messages", :action => "show", :emoji => emoji[0]  %>
@@ -13,6 +17,13 @@
       <td>
         <%= emoji[1] %>
       </td>
+      <td>
+        <% if @trends[i] > 0%>
+        <%= "↑" %>
+        <% end %>
+      </td>
     </tr>
   <% end %>
 </table>
+</div>
+</div>

@@ -1,4 +1,4 @@
-<h2> Daily totals for <%= @emoji %> </h2>
+<h2> Daily recorded totals for <%= @emoji %> vs 🍆</h2>
 
   <!-- Move this out of here -->
 
@@ -7,85 +7,43 @@
   <canvas id="myChart" width="400" height="250"></canvas>
   <script>
   var ctx = document.getElementById("myChart");
-var myChart = new Chart(ctx, {
-  type: 'bar',
-  data: {
-      labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-      datasets: [{
-          label: '# of Occurances',
-          data: [<%= @sun %>, <%= @mon %>, <%= @tues %>, <%= @wed %>, <%= @thur %>, <%= @fri %>, <%= @sat %>],
-          backgroundColor: [
-              'rgba(255, 99, 132, 0.2)',
-              'rgba(54, 162, 235, 0.2)',
-              'rgba(255, 206, 86, 0.2)',
-              'rgba(75, 192, 192, 0.2)',
-              'rgba(153, 102, 255, 0.2)',
-              'rgba(255, 159, 64, 0.2)',
-              'rgba(255, 20, 132, 0.2)'
-          ],
-          borderColor: [
-              'rgba(255,99,132,1)',
-              'rgba(54, 162, 235, 1)',
-              'rgba(255, 206, 86, 1)',
-              'rgba(75, 192, 192, 1)',
-              'rgba(153, 102, 255, 1)',
-              'rgba(255, 159, 64, 1)',
-              'rgba(255, 20, 132, 1)'
-          ],
-          borderWidth: 1
-      }]
-  },
-  options: {
-      scales: {
-          yAxes: [{
-              ticks: {
-                  beginAtZero:true
-              }
-          }]
-      }
-  }
-});
+  var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: [ "Past 72 hours", "Past 48 hours", "Past 24 hours"],
+        datasets: [{
+            label: "<%= @emoji %>",
+            data: [ <%= @day_two %>, <%= @day_one %>, <%= @day_zero %> ],
+
+            borderColor: 'rgba(75, 192, 192, 1)',
+            backgroundColor: 'rgba(75, 192, 192, .3)',
+            borderWidth: 1,
+            pointRadius: 5
+        }
+        ,{
+          label: '🍆',
+
+          data: [ <%= @egg_day_two %>, <%= @egg_day_one %>, <%= @egg_day_zero %>],
+
+          borderColor: 'rgba(54, 4, 150, 1)',
+          backgroundColor: 'rgba(54, 4, 150, .3)',
+          borderWidth: 1,
+          pointRadius: 5
+
+        }
+
+      ]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+  });
 
 
   </script>
-
-
-
-<br>
-<Br>
-
-  <table style="color: #e0e0e0;">
-    <tr>
-      <th>Sunday</th>
-      <th>Monday</th>
-      <th>Tuesday</th>
-      <th>Wednesday</th>
-      <th>Thursday</th>
-      <th>Friday</th>
-      <th>Saturday</th>
-    </tr>
-    <tr>
-      <td>
-        <%= @sun %>
-      </td>
-      <td>
-        <%= @mon %>
-      </td>
-      <td>
-        <%= @tues %>
-      </td>
-      <td>
-        <%= @wed %>
-      </td>
-      <td>
-        <%= @thur %>
-      </td>
-      <td>
-        <%= @fri %>
-      </td>
-      <td>
-        <%= @sat %>
-      </td>
-
-    </tr>
-  <table>
