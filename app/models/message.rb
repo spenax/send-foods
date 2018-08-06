@@ -94,17 +94,13 @@ class Message < ApplicationRecord
     #return 1 if the average rate of change of set of points is increasing at an increasing rate
 
     def rate_of_change(p_two, p_one, p_zero)
-
       #this is the most recent slope
       @l_zero = p_zero - p_one
-
       #this is the older slope
       @l_one = p_one - p_two
 
       if (@l_zero.abs > @l_one.abs) && (@l_zero > 0)
         1
-      #elsif @l_zero.abs < @l_one.abs
-        #-1
       else
         0
       end

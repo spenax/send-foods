@@ -1,49 +1,36 @@
-<h2> Daily recorded totals for <%= @emoji %> vs 🍆</h2>
+<div class="chart-head">
+  <h2> <%= @emoji %> vs 🍆</h2>
+</div>
 
-  <!-- Move this out of here -->
+<div class="comp-chart">
 
+  <% data = {
+    labels: ["Past 72 hours", "Past 48 hours", "Past 24 hours"],
+    datasets: [
+      {
+          label: @emoji,
+          #backgroundColor: "rgba(151,187,205,0.2)",
+          #borderColor: "rgba(151,187,205,1)",
+          backgroundColor: "rgba(61, 162, 104,0.2)",
+          borderColor: "rgba(61, 162, 104,1)",
+          data: [@day_two , @day_one , @day_zero]
+      },
+      {
+          label: "🍆",
+          #backgroundColor: "rgba(220,220,220,0.2)",
+          #borderColor: "rgba(220,220,220,1)",
+          backgroundColor: "rgba(100, 37, 254, 0.2)",
+          borderColor: "rgba(100, 37, 254, 1)",
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
-  <canvas id="myChart" width="400" height="250"></canvas>
-  <script>
-  var ctx = document.getElementById("myChart");
-  var myChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-        labels: [ "Past 72 hours", "Past 48 hours", "Past 24 hours"],
-        datasets: [{
-            label: "<%= @emoji %>",
-            data: [ <%= @day_two %>, <%= @day_one %>, <%= @day_zero %> ],
+          data: [@egg_day_two, @egg_day_one, @egg_day_zero]
+      }
+    ]
+  }
+  options = { begin_at_zero: "true", width: "800" } %>
+  <%= line_chart data, options %>
 
-            borderColor: 'rgba(75, 192, 192, 1)',
-            backgroundColor: 'rgba(75, 192, 192, .3)',
-            borderWidth: 1,
-            pointRadius: 5
-        }
-        ,{
-          label: '🍆',
+</div>
 
-          data: [ <%= @egg_day_two %>, <%= @egg_day_one %>, <%= @egg_day_zero %>],
-
-          borderColor: 'rgba(54, 4, 150, 1)',
-          backgroundColor: 'rgba(54, 4, 150, .3)',
-          borderWidth: 1,
-          pointRadius: 5
-
-        }
-
-      ]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero:true
-                }
-            }]
-        }
-    }
-  });
-
-
-  </script>
+<div class="bottom-nav">
+<%= link_to "Return home", controller: "messages" %>
+</div>
