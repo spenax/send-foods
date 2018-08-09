@@ -31,16 +31,34 @@ body{
 
 }
 .intro{
-  @extend .col-lg-6;
-  @extend .offset-lg-3;
+  @extend .col-lg-4;
+  @extend .offset-lg-1;
   //padding: 1rem;
-  color: white;
+  color: #3f3a5e;
   //text-align: center;
-  margin-bottom: 2rem;
+  //margin-bottom: 2rem;
+  //margin-top: auto;
+  //margin-bottom: auto;
+
   h1{
     text-align: center;
     font-size: 3rem;
   }
+
+
+}
+.header-text{
+  background: white;
+  padding: 7px;
+  border-radius: 3px;
+  line-height: 1.5;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+.giant{
+  font-size: 5rem;
+  text-align: center;
+  margin-bottom: 2rem;
 }
 
 #messages_index {
@@ -53,14 +71,23 @@ body{
 }
 
 .top-ten-list{
-  @extend .col-lg-6;
-  @extend .offset-lg-3;
+  @extend .col-lg-5;
+  @extend .offset-lg-1;
+
   h3 {
     text-align: center;
   }
   background: white;
   border-radius: 3px;
   padding: 1rem;
+
+  .listed-emoji{
+    &:hover{
+      font-size: xx-large;
+      text-decoration: none;
+    }
+
+  }
 }
 
 .comp-chart{

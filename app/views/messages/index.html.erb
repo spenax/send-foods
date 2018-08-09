@@ -1,6 +1,21 @@
+<div class="row">
 <div class ="intro">
-  <h1>📥 Send foods 🍆 </h1>
-  <p>Slide into the public transactions feeds of Venmo users all over the world and find out what folks are spending their money one.</p>
+  <!--h1>📥 Send foods 🍆 </h1-->
+  <div class="giant">🍆 🍑 🌮</div>
+  <h3 ><span class="header-text">Find out what folks are eating</span></h3>
+  <p>
+    Slide into the feeds of millions of daily Venmo users all across the globe.
+    Each minute, the SendFoods Emojilytics™ engine crunches data on the emoji people are
+    using to describe their payments and requests. Find out what people are
+    sending each other money for.
+  </p>
+  <h5><span class="header-text">U up? 😏 </span></h5>
+  <p>
+    The SendFoods Big Board shows near-realtime sampling of the venmo transactions that have happened
+    over the past hour. Check out the trending column to see if for recent upticks
+     of emoji usages. Click through an emoji to see how it stacks up against other
+     popular emoji.
+  </p>
 </div>
 
 <div class="top-ten-list">
@@ -19,7 +34,7 @@
         <%= i + 1 %>
       </td>
       <td>
-        <%= link_to emoji[0], :controller => "messages", :action => "show", :emoji => emoji[0]  %>
+        <%= link_to emoji[0], {:controller => "messages", :action => "show", :emoji => emoji[0]}, class: "listed-emoji"  %>
       </td>
       <!--td>
         <%= emoji[1] %>
@@ -32,5 +47,6 @@
     </tr>
   <% end %>
 </table>
+</div>
 </div>
 </div>
