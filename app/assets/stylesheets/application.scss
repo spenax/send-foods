@@ -30,6 +30,11 @@ body{
   background: #b5abf2;
 
 }
+.navbar-brand{
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 2rem;
+}
 .intro{
   @extend .col-lg-4;
   @extend .offset-lg-1;
@@ -106,4 +111,7 @@ body{
 .bottom-nav{
   margin-top: 1rem;
   text-align: center;
+}
+.error{
+  @extend .col-lg-12;
 }

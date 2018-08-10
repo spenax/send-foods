@@ -101,6 +101,8 @@ class Message < ApplicationRecord
 
       if (@l_zero.abs > @l_one.abs) && (@l_zero > 0)
         1
+      elsif (@l_zero.abs < @l_one.abs) && (@l_zero < 0)
+        -1
       else
         0
       end
@@ -118,6 +120,18 @@ class Message < ApplicationRecord
         trends.push(rate)
       end
       trends
+
+    end
+
+    def single_trend (emoji)
+      past_three = self.last_three_hours_combined
+
+      @first_hour_ago = past_three.last_hour.where(emoji: emoji).pluck(:created_at).count
+      @second_hour_ago = past_three.last_hour_plus_one.where(emoji: emoji).pluck(:created_at).count
+      @third_hour_ago = past_three.last_hour_plus_two.where(emoji: emoji).pluck(:created_at).count
+      rate = rate_of_change(@third_hour_ago, @second_hour_ago, @first_hour_ago)
+
+      rate
 
     end
 

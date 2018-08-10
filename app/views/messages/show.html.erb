@@ -1,34 +1,47 @@
-<div class="chart-head">
-  <h2> <span class="header-text"><%= @emoji %> vs 🍆<br>(daily totals)</span></h2>
+<!--div class="chart-head">
+  <h2> <span class="header-text"><%= @emoji %> (daily totals)</span></h2>
 
-</div>
+</div-->
 
-<div class="comp-chart">
+<div class="row">
 
-  <% data = {
-    labels: ["Past 72 hours", "Past 48 hours", "Past 24 hours"],
-    datasets: [
-      {
-          label: @emoji,
-          #backgroundColor: "rgba(151,187,205,0.2)",
-          #borderColor: "rgba(151,187,205,1)",
-          backgroundColor: "rgba(61, 162, 104,0.2)",
-          borderColor: "rgba(61, 162, 104,1)",
-          data: [@day_two , @day_one , @day_zero]
-      },
-      {
-          label: "🍆",
-          #backgroundColor: "rgba(220,220,220,0.2)",
-          #borderColor: "rgba(220,220,220,1)",
-          backgroundColor: "rgba(100, 37, 254, 0.2)",
-          borderColor: "rgba(100, 37, 254, 1)",
 
-          data: [@egg_day_two, @egg_day_one, @egg_day_zero]
+  <% if emoji_exists(@emoji) %>
+    <div class="comp-chart col-lg-6">
+
+      <% data = {
+        labels: ["Past 72 hours", "Past 48 hours", "Past 24 hours"],
+        datasets: [
+          {
+              label: @emoji,
+              #backgroundColor: "rgba(151,187,205,0.2)",
+              #borderColor: "rgba(151,187,205,1)",
+              backgroundColor: "rgba(61, 162, 104,0.2)",
+              borderColor: "rgba(61, 162, 104,1)",
+              data: [@day_two , @day_one , @day_zero]
+          }
+        ]
       }
-    ]
-  }
-  options = { begin_at_zero: "true", width: "800" } %>
-  <%= line_chart data, options %>
+      options = { begin_at_zero: "true", width: "800" } %>
+      <%= line_chart data, options %>
+
+    </div>
+
+    <div class="stats col-lg-4">
+      <h2><%= @emoji %> <%= find_name(@emoji) %> <%= " Emoji" %></h2>
+      <p>Usage has been <b><%= trend_word(@trend) %></b> since <%= hour_ago %> </p>
+      
+
+
+    </div>
+
+  <% else %>
+    <div class="error">
+    <h1> Sorry pimpin. No <%= @emoji %> here.</h1>
+    <h3> Holler at <a href="https://twitter.com/spenax">@spenax</a> on twitter if you think he should add the newest emoji in </h3>
+    </div>
+  <% end %>
+
 
 </div>
 
