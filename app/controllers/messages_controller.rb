@@ -4,7 +4,7 @@ class MessagesController < ApplicationController
 
   def index
     @hourly_list = Message.hourly_tally[0..9]
-    @trends = Message.last_three(@hourly_list)
+  
 
   end
 

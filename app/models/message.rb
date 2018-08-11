@@ -67,11 +67,18 @@ class Message < ApplicationRecord
     # Could be made more efficient by eliminating dupes before parse.
 
 
-    def import_latest
-      recent_trans = self.req(BASE_URL) #array of hashes
+    #Refect so that
+
+    def get_simple_parse
+      recent_trans = self.req(BASE_URL)
+    end
+
+    def import_latest(parsed_messages)
+      #recent_trans = self.req(BASE_URL) #array of hashes
+      recent_trans = parsed_messages
       recent_trans.each do |tran|
         @unique_emoji = self.parse_emoji(tran["message"])
-        if @unique_emoji
+        if @unique_emoji.any?
           @unique_emoji.each do |emoji|
             @name = emoji.name
             self.create(emoji: emoji)
