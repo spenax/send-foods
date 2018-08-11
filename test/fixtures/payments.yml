@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  note: MyText
+  actor_name: MyString
+  target_name: MyString
+  actor_pic: MyText
+  target_pic: MyText
+
+two:
+  note: MyText
+  actor_name: MyString
+  target_name: MyString
+  actor_pic: MyText
+  target_pic: MyText

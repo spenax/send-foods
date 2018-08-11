@@ -1,4 +1,5 @@
 class Message < ApplicationRecord
+  belongs_to :Payment
   validates_presence_of :emoji
   scope :last_hour, -> { where('created_at > ?', 1.hour.ago)}
   scope :last_hour_plus_one, -> { where('created_at < ? AND created_at > ?', 1.hour.ago, 2.hours.ago)}
