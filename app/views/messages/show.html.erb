@@ -30,7 +30,11 @@
     <div class="stats col-lg-4">
       <h2><%= @emoji %> <%= find_name(@emoji) %> <%= " Emoji" %></h2>
       <p>Usage has been <b><%= trend_word(@trend) %></b> since <%= hour_ago %> </p>
-      
+
+      <h5>Recent</h5>
+      <p><%= @first %></p>
+      <p><%= @second %></p>
+      <p><%= @third %></p>
 
 
     </div>

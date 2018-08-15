@@ -4,7 +4,7 @@ class MessagesController < ApplicationController
 
   def index
     @hourly_list = Message.hourly_tally[0..9]
-  
+
 
   end
 
@@ -39,6 +39,13 @@ class MessagesController < ApplicationController
     @day_zero = totals[0]
     @day_one = totals[1]
     @day_two = totals[2]
+
+    @recent = Message.last_hour.where(emoji: @emoji).limit(3)
+    @first = @recent.first.Payment.note
+    @second = @recent.second.Payment.note
+    @third = @recent.third.Payment.note
+
+
 
 
     #@name = find_name(@emoji)

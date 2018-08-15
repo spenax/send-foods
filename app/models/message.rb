@@ -1,5 +1,5 @@
 class Message < ApplicationRecord
-  belongs_to :Payment
+  belongs_to :Payment, optional: true, foreign_key: "payment_id"
   validates_presence_of :emoji
   scope :last_hour, -> { where('created_at > ?', 1.hour.ago)}
   scope :last_hour_plus_one, -> { where('created_at < ? AND created_at > ?', 1.hour.ago, 2.hours.ago)}
@@ -33,7 +33,7 @@ class Message < ApplicationRecord
 
 
   class << self
-    BASE_URL = "https://venmo.com/api/v5/public"
+
     def alltime_tally
       @all_time_counts = self.group(:emoji).count
       self.reverse_sort(@all_time_counts)
@@ -52,11 +52,21 @@ class Message < ApplicationRecord
 
     end
 
-    def req(url)
-      request = Faraday.get(url)
-      JSON.parse(request.body)["data"]
-      #outputs an array of hashes
+    def import_latest(parsed_messages)
+      #recent_trans = self.req(BASE_URL) #array of hashes
+      recent_trans = parsed_messages
+      recent_trans.each do |tran|
+        @unique_emoji = self.parse_emoji(tran["message"])
+        if @unique_emoji.any?
+          @unique_emoji.each do |emoji|
+            #@name = emoji.name
+            self.create(emoji: emoji)
+          end
+        end
+      end
     end
+
+
 
     def parse_emoji(message)
       emoji_list = EmojiData.scan(message)
@@ -70,23 +80,6 @@ class Message < ApplicationRecord
 
     #Refect so that
 
-    def get_simple_parse
-      recent_trans = self.req(BASE_URL)
-    end
-
-    def import_latest(parsed_messages)
-      #recent_trans = self.req(BASE_URL) #array of hashes
-      recent_trans = parsed_messages
-      recent_trans.each do |tran|
-        @unique_emoji = self.parse_emoji(tran["message"])
-        if @unique_emoji.any?
-          @unique_emoji.each do |emoji|
-            @name = emoji.name
-            self.create(emoji: emoji)
-          end
-        end
-      end
-    end
 
     # Return array of daily totals for Sunday through Saturday of a type of emoji...ex: poop
     def daily_totals(emoji)

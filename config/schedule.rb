@@ -20,7 +20,7 @@ ENV['RAILS_ENV'] = "development"
 set :output, 'log/whenever.log'
 job_type :doit, 'cd :path && :environment_variable="development" bundle exec rake :task --silent :output'
 
-every :minute do
+every 5.minutes do
   doit "new_venmo_trans"
 end
 
