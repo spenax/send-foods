@@ -32,19 +32,43 @@ class MessagesController < ApplicationController
 
     @emoji = params[:emoji]
     @message = Message.find_by(emoji: @emoji)
-    totals = Message.daily_totals(@emoji)
-    @trend = Message.single_trend(@emoji)
+    #totals = Message.daily_totals(@emoji)
+    totals = Message.hourly_totals(@emoji)
+    #@trend = Message.single_trend(@emoji)
 
 
-    @day_zero = totals[0]
-    @day_one = totals[1]
-    @day_two = totals[2]
+    #@day_zero = totals[0]
+    #@day_one = totals[1]
+    #@day_two = totals[2]
+
+    @hour_zero = totals[0]
+    @hour_one = totals[1]
+    @hour_two = totals[2]
+
+    #Put this in the Payment model
+    # Payment.recent(insert_emoji, 3)
+    # output a hash
+    # Here
 
     @recent = Message.last_hour.where(emoji: @emoji).limit(3)
-    @first = @recent.first.Payment.note
-    @second = @recent.second.Payment.note
-    @third = @recent.third.Payment.note
+    if @recent.first
+      @first_examp = @recent.first.Payment.note
+      @first_actor = @recent.first.Payment.actor_name
+      @first_target = @recent.first.Payment.target_name
+    end
 
+
+    if @recent.second
+      @second_examp = @recent.second.Payment.note
+      @second_actor = @recent.second.Payment.actor_name
+      @second_target = @recent.second.Payment.target_name
+    end
+
+    if @recent.third
+      @third_examp = @recent.third.Payment.note
+      @third_actor = @recent.third.Payment.actor_name
+      @third_target = @recent.third.Payment.target_name
+    end
 
 
 

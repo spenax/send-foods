@@ -1,7 +1,7 @@
 class Payment < ApplicationRecord
   has_many :messages
 
-  BASE_URL = "https://venmo.com/api/v5/public"
+  BASE_URL = "https://venmo.com/api/v5/public?limit=50"
 
 class << self
   def req(url)

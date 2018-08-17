@@ -21,8 +21,8 @@ body{
   background: #8f88b7;
 }
 .wrapper{
-  color: #333041 ;
-  margin-top: 2rem;
+  color: #333041;
+  //margin-top: 2rem;
   padding-top: 2rem;
   padding-bottom: 2rem;
   @extend .container;
@@ -37,6 +37,8 @@ body{
 }
 .intro{
   @extend .col-lg-4;
+  @extend .col-md-6;
+  @extend .offset-md-3;
   @extend .offset-lg-1;
   //padding: 1rem;
   color: #3f3a5e;
@@ -49,9 +51,22 @@ body{
     text-align: center;
     font-size: 3rem;
   }
+  h3,h5{
+    text-align: right;
+  }
+
+  p{
+    background: #d3ccff;
+    padding: 1rem;
+    border-radius: 5px;
+    margin-top: 1rem;
+
+
+  }
 
 
 }
+
 .header-text{
   background: white;
   padding: 7px;
@@ -60,11 +75,38 @@ body{
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
 }
+
+
+
 .giant{
   font-size: 5rem;
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
+  background-color: #ffd494;
+  border-radius: 3px;
+  animation: changeBgColor 4s infinite;
 }
+
+@keyframes changeBgColor{
+  0%{
+    background-color: #94ecff;
+  }
+
+  50%{
+    background-color: #b6ff94;
+  }
+
+  100%{
+    background-color: #94ecff;
+  }
+
+}
+
+
+
+
+
+
 
 #messages_index {
   tr {
@@ -78,6 +120,8 @@ body{
 .top-ten-list{
   @extend .col-lg-5;
   @extend .offset-lg-1;
+  margin-top: auto;
+  margin-bottom: auto;
 
   h3 {
     text-align: center;
@@ -95,10 +139,25 @@ body{
   }
 }
 
-.comp-chart{
+.single-chart{
+  @extend .col-lg-6;
+  //@extend .offset-lg-4;
   background: white;
   padding: 1rem;
   margin: 2rem;
+  border-radius: 3px;
+  height: 100%;
+}
+.comp-chart{
+  @extend .offset-lg-1;
+  @extend .col-lg-10;
+
+  background: white;
+  padding: 1rem;
+  //margin: 2rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2rem;
   border-radius: 3px;
 }
 
@@ -108,10 +167,55 @@ body{
     margin-bottom: 2rem;
   }
 }
+#single-title{
+
+  @extend .col-lg-12;
+  h2{
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+
 .bottom-nav{
   margin-top: 1rem;
   text-align: center;
 }
 .error{
   @extend .col-lg-12;
+}
+
+.stats{
+
+  @extend .col-lg-5;
+  margin-top: 2rem;
+  h2{
+    text-align: right;
+  }
+  #badges{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  .stat-badge{
+    font-size: 3rem;
+    color: white;
+    background: #363150;
+    padding: 5px;
+  }
+  .emo-example{
+    background: white;
+    padding: 5px 8px;
+
+    border-radius: 1rem;
+    font-size: large;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
+  p.emo-graph{
+      padding: 8px;
+      border-radius: 4px;
+      background: #d3ccff;
+      line-height: 2;
+  }
+
 }

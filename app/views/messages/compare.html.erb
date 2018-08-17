@@ -1,37 +1,44 @@
-<div class="chart-head">
-  <h2> <span class="header-text">Comparing <%= @emoji_one %> and <%= @emoji_two %> <br>(daily totals)</span></h2>
+<div class="row" id="single-title">
+
+    <h2> <span class="header-text">Comparing <%= @emoji_one %> and <%= @emoji_two %> (daily totals)</span></h2>
 
 </div>
 
-<div class="comp-chart">
+<div class="row">
+  <div class="comp-chart">
 
-  <% data = {
-    labels: ["Past 72 hours", "Past 48 hours", "Past 24 hours"],
-    datasets: [
-      {
-          label: @emoji_one,
-          #backgroundColor: "rgba(151,187,205,0.2)",
-          #borderColor: "rgba(151,187,205,1)",
-          backgroundColor: "rgba(61, 162, 104,0.2)",
-          borderColor: "rgba(61, 162, 104,1)",
-          data: [@first_emo_two , @first_emo_one , @first_emo_zero]
-      },
-      {
-          label: @emoji_two,
-          #backgroundColor: "rgba(220,220,220,0.2)",
-          #borderColor: "rgba(220,220,220,1)",
-          backgroundColor: "rgba(100, 37, 254, 0.2)",
-          borderColor: "rgba(100, 37, 254, 1)",
+    <% data = {
+      labels: ["Past 72 hours", "Past 48 hours", "Past 24 hours"],
+      datasets: [
+        {
+            label: @emoji_one,
+            #backgroundColor: "rgba(151,187,205,0.2)",
+            #borderColor: "rgba(151,187,205,1)",
+            backgroundColor: "rgba(61, 162, 104,0.2)",
+            borderColor: "rgba(61, 162, 104,1)",
+            data: [@first_emo_two , @first_emo_one , @first_emo_zero]
+        },
+        {
+            label: @emoji_two,
+            #backgroundColor: "rgba(220,220,220,0.2)",
+            #borderColor: "rgba(220,220,220,1)",
+            backgroundColor: "rgba(100, 37, 254, 0.2)",
+            borderColor: "rgba(100, 37, 254, 1)",
 
-          data: [@second_emo_two, @second_emo_one, @second_emo_zero]
-      }
-    ]
-  }
-  options = { begin_at_zero: "true", width: "800" } %>
-  <%= line_chart data, options %>
+            data: [@second_emo_two, @second_emo_one, @second_emo_zero]
+        }
+      ]
+    }
+    options = { begin_at_zero: "true", width: "80%", height: "50%"} %>
+    <%= line_chart data, options %>
 
-</div>
+  </div>
 
-<div class="bottom-nav">
+
+
+
+<!--div class="bottom-nav">
 <%= link_to "Return home", controller: "messages" %>
+</div-->
+
 </div>

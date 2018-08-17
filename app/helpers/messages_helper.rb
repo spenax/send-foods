@@ -16,14 +16,26 @@ def emoji_exists(emoji)
   end
 end
 
-def trend_word(num)
-  num == 1 ? "trending" : "not trending"
+def trend_icon(num)
+  #num == 1 ? "trending" : "not trending"
   if num == 1
-    "blowing up"
+    "fas fa-arrow-up"
   elsif num == -1
-    "petering out"
+    "fas fa-arrow-down"
 
   end
+end
+
+def rand_emoji(num)
+
+  every_emoji = EmojiData.all
+  emoji_array = []
+  while num > 0
+    rando = Random.new.rand(0..844)
+    emoji_array.push(every_emoji[rando].render)
+    num = num - 1
+  end
+  emoji_array
 end
 
 def hour_ago

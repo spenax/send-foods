@@ -3,14 +3,18 @@
 
 </div-->
 
+<div class="row" id="single-title">
+  <h2><span class="header-text"><%= @emoji %> <%= find_name(@emoji) %> <%= " Emoji" %></span></h2>
+</div>
+
 <div class="row">
 
 
   <% if emoji_exists(@emoji) %>
-    <div class="comp-chart col-lg-6">
+    <div class="single-chart">
 
       <% data = {
-        labels: ["Past 72 hours", "Past 48 hours", "Past 24 hours"],
+        labels: ["-3hr", "-2hr", "-1hr"],
         datasets: [
           {
               label: @emoji,
@@ -18,24 +22,42 @@
               #borderColor: "rgba(151,187,205,1)",
               backgroundColor: "rgba(61, 162, 104,0.2)",
               borderColor: "rgba(61, 162, 104,1)",
-              data: [@day_two , @day_one , @day_zero]
+              data: [@hour_two , @hour_one , @hour_zero]
           }
         ]
       }
-      options = { begin_at_zero: "true", width: "800" } %>
+      options = { begin_at_zero: "true", width: "100%", height: "70%" } %>
       <%= line_chart data, options %>
 
     </div>
 
-    <div class="stats col-lg-4">
-      <h2><%= @emoji %> <%= find_name(@emoji) %> <%= " Emoji" %></h2>
-      <p>Usage has been <b><%= trend_word(@trend) %></b> since <%= hour_ago %> </p>
+    <div class="stats">
 
-      <h5>Recent</h5>
-      <p><%= @first %></p>
-      <p><%= @second %></p>
-      <p><%= @third %></p>
 
+
+
+      <h5>Recent:</h5>
+      <% if !@third_examp.nil? && !@first_examp.nil? %>
+        <p class="emo-graph"><%= @first_actor %> exchanged <span class="emo-example"><%= @first_examp %></span> money with <%= @first_target %></p>
+        <p class="emo-graph"><%= @second_actor %> exchanged <span class="emo-example"><%= @second_examp %></span> money with <%= @second_target %></p>
+        <p class="emo-graph"><%= @third_actor %> exchanged <span class="emo-example"><%= @third_examp %></span> money with <%= @third_target %></p>
+      <% else %>
+        <p> Sorry! No recent <%= @emoji %> examples yet.</p>
+
+      <% end %>
+      <!--div id="badges">
+        <h6>Current trends</h6>
+
+        <i class="stat-badge <%= trend_icon(@trend) %>"></i>
+      </div-->
+
+      <h5>Compare historical data with:</h5>
+
+      <p>
+        <% rand_emoji(8).each do |rand_emoji| %>
+        <a href="/compare/<%= @emoji.to_s + rand_emoji.to_s %>"> <span class="emo-example"><%= rand_emoji %></span></a>
+        <% end %>
+      </p>
 
     </div>
 

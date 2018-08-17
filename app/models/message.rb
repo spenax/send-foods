@@ -91,6 +91,15 @@ class Message < ApplicationRecord
 
     end
 
+    # Return and array of totals for the last threee hours...ex: poop
+
+    def hourly_totals(emoji)
+      hour_zero = self.last_hour.where(emoji: emoji).pluck(:created_at).size
+      hour_one = self.last_hour_plus_one.where(emoji: emoji).pluck(:created_at).size
+      hour_two = self.last_hour_plus_two.where(emoji: emoji).pluck(:created_at).size
+      some_days = [hour_zero, hour_one, hour_two]
+    end
+
 
     #return 1 if the average rate of change of set of points is increasing at an increasing rate
 
