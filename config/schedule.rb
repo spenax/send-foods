@@ -16,14 +16,17 @@
 # every 4.days do
 #   runner "AnotherModel.prune_old_records"
 # end
-ENV['RAILS_ENV'] = "development"
+# ENV['RAILS_ENV'] = "development"
+
+env :PATH, ENV['PATH']
+env :GEM_PATH, ENV['GEM_PATH']
+
 set :output, 'log/whenever.log'
 job_type :doit, 'cd :path && :environment_variable=:environment bundle exec rake :task --silent :output'
 
 every 5.minutes do
   doit "new_venmo_trans"
 end
-
 
 
 # Learn more: http://github.com/javan/whenever
