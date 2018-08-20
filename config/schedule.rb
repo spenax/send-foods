@@ -18,12 +18,10 @@
 # end
 ENV['RAILS_ENV'] = "development"
 set :output, 'log/whenever.log'
-job_type :doit, 'cd :path && :environment_variable="development" bundle exec rake :task --silent :output'
-job_type :doitlive, 'cd :path && :environment_variable="production" bundle exec rake :task --silent :output'
+job_type :doit, 'cd :path && :environment_variable=:environment bundle exec rake :task --silent :output'
 
 every 5.minutes do
   doit "new_venmo_trans"
-  doitlive "new_venmo_trans"
 end
 
 
