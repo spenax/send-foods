@@ -55,7 +55,8 @@
 
       <p>
         <% rand_emoji(8).each do |rand_emoji| %>
-        <a href="/compare/<%= @emoji.to_s + rand_emoji.to_s %>"> <span class="emo-example"><%= rand_emoji %></span></a>
+        <!--a href="/compare/<%= rand_emoji.to_s + @emoji.to_s %>"> <span class="emo-example"><%= rand_emoji %></span></a-->
+        <%= link_to rand_emoji, {:controller => "messages", :action => "compare", :emoji_one => @emoji, :emoji_two => rand_emoji } %>
         <% end %>
       </p>
 

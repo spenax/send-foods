@@ -10,8 +10,10 @@ class MessagesController < ApplicationController
 
   def compare
 
-    @emoji_one = params[:emoji][0]
-    @emoji_two = params[:emoji][1]
+    #dodgy attempt to clean data
+    @emoji_one = params[:emoji_one]
+    #@emoji_two = EmojiData.scan(params[:emoji][1])[0].render
+    @emoji_two = params[:emoji_two]
 
     first_totals = Message.daily_totals(@emoji_one)
     second_totals = Message.daily_totals(@emoji_two)
