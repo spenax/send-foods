@@ -19,7 +19,7 @@
 #ENV['RAILS_ENV'] = "development"
 
 env :PATH, ENV['PATH']
-env :GEM_PATH, ENV['GEM_PATH']
+#env :GEM_PATH, ENV['GEM_PATH']
 
 set :output, 'log/whenever.log'
 job_type :doit, 'cd :path && :environment_variable=:environment bundle exec rake :task --silent :output'
