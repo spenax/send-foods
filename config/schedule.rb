@@ -25,7 +25,7 @@ set :output, 'log/whenever.log'
 job_type :doit, 'cd :path && :environment_variable=:environment bundle exec rake :task --silent :output'
 
 every 5.minutes do
-  doit "new_venmo_trans", :environment => @environment
+  doit "new_venmo_trans"
 end
 
 
