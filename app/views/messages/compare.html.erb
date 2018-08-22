@@ -1,14 +1,15 @@
-<div class="row" id="single-title">
-
+<div class="row">
+  <div class="single-title">
     <h2> <span class="header-text">Comparing <%= @emoji_one %> and <%= @emoji_two %> (daily totals)</span></h2>
-
+  </div>
 </div>
 
 <div class="row">
   <div class="comp-chart">
+    <h3 class="chart-title">The Past 72 Hours</h3>
 
     <% data = {
-      labels: ["Past 72 hours", "Past 48 hours", "Past 24 hours"],
+      labels: ["48 hrs", "24 hrs", "0 hrs"],
       datasets: [
         {
             label: @emoji_one,
@@ -29,7 +30,7 @@
         }
       ]
     }
-    options = { begin_at_zero: "true", width: "80%", height: "50%"} %>
+    options = { begin_at_zero: "true", height: "600", width: "1000", scales: { xAxes: [{ scaleLabel: {display: true, labelString: 'Hours ago'}}], yAxes: [{ scaleLabel: {display: true, labelString: 'Emoji Tracked'}}] }} %>
     <%= line_chart data, options %>
 
   </div>
@@ -37,8 +38,10 @@
 
 
 
-<!--div class="bottom-nav">
-<%= link_to "Return home", controller: "messages" %>
-</div-->
 
+
+</div>
+<div class="bottom-nav">
+<%# link_to "Return home", controller: "messages" %>
+<%= link_to "Back to #{@emoji_one}", :back %>
 </div>

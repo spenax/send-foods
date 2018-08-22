@@ -1,10 +1,8 @@
-<!--div class="chart-head">
-  <h2> <span class="header-text"><%= @emoji %> (daily totals)</span></h2>
 
-</div-->
-
-<div class="row" id="single-title">
-  <h2><span class="header-text"><%= @emoji %> <%= find_name(@emoji) %> <%= " Emoji" %></span></h2>
+<div class="row">
+  <div class="single-title">
+    <h2><span class="header-text"><%= @emoji %> <%= find_name(@emoji) %> <%= " Emoji" %></span></h2>
+  </div>
 </div>
 
 <div class="row">
@@ -12,9 +10,11 @@
 
   <% if emoji_exists(@emoji) %>
     <div class="single-chart">
+      <h3 class="chart-title">The Past Five Hours</h3>
 
       <% data = {
-        labels: ["-3hr", "-2hr", "-1hr"],
+
+        labels: ["4 hrs", "3 hrs", "2 hrs", "1 hr", "0 hrs"],
         datasets: [
           {
               label: @emoji,
@@ -22,11 +22,11 @@
               #borderColor: "rgba(151,187,205,1)",
               backgroundColor: "rgba(61, 162, 104,0.2)",
               borderColor: "rgba(61, 162, 104,1)",
-              data: [@hour_two , @hour_one , @hour_zero]
+              data: [@hour_four, @hour_three, @hour_two , @hour_one , @hour_zero]
           }
         ]
       }
-      options = { begin_at_zero: "true", width: "100%", height: "70%" } %>
+      options = { begin_at_zero: "true", width: "1000", height: "600", scales: { xAxes: [{ scaleLabel: {display: true, labelString: 'Hours ago'}}], yAxes: [{ scaleLabel: {display: true, labelString: 'Emoji Tracked'}}] } } %>
       <%= line_chart data, options %>
 
     </div>
@@ -53,12 +53,12 @@
 
       <h5>Compare historical data with:</h5>
 
-      <p>
+      <div class="examps">
         <% rand_emoji(8).each do |rand_emoji| %>
         <!--a href="/compare/<%= rand_emoji.to_s + @emoji.to_s %>"> <span class="emo-example"><%= rand_emoji %></span></a-->
-        <%= link_to rand_emoji, {:controller => "messages", :action => "compare", :emoji_one => @emoji, :emoji_two => rand_emoji } %>
+        <%= link_to rand_emoji, {:controller => "messages", :action => "compare", :emoji_one => @emoji, :emoji_two => rand_emoji }, class: "emo-example shrink"%>
         <% end %>
-      </p>
+      </div>
 
     </div>
 
@@ -73,5 +73,6 @@
 </div>
 
 <div class="bottom-nav">
-<%= link_to "Return home", controller: "messages" %>
+<%= link_to "Return Home 🏠", controller: "messages" %>
+
 </div>

@@ -4,6 +4,8 @@ class Message < ApplicationRecord
   scope :last_hour, -> { where('created_at > ?', 1.hour.ago)}
   scope :last_hour_plus_one, -> { where('created_at < ? AND created_at > ?', 1.hour.ago, 2.hours.ago)}
   scope :last_hour_plus_two, -> { where('created_at < ? AND created_at > ?', 2.hours.ago, 3.hours.ago)}
+  scope :last_hour_plus_three, -> { where('created_at < ? AND created_at > ?', 3.hours.ago, 4.hours.ago)}
+  scope :last_hour_plus_four, -> { where('created_at < ? AND created_at > ?', 4.hours.ago, 5.hours.ago)}
 
   scope :last_three_hours_combined, -> { where('created_at > ?', 3.hours.ago)}
   # Probably bad becauce they will return all if nil?
@@ -97,7 +99,9 @@ class Message < ApplicationRecord
       hour_zero = self.last_hour.where(emoji: emoji).pluck(:created_at).size
       hour_one = self.last_hour_plus_one.where(emoji: emoji).pluck(:created_at).size
       hour_two = self.last_hour_plus_two.where(emoji: emoji).pluck(:created_at).size
-      some_days = [hour_zero, hour_one, hour_two]
+      hour_three = self.last_hour_plus_three.where(emoji: emoji).pluck(:created_at).size
+      hour_four = self.last_hour_plus_four.where(emoji: emoji).pluck(:created_at).size
+      some_days = [hour_zero, hour_one, hour_two, hour_three, hour_four]
     end
 
 

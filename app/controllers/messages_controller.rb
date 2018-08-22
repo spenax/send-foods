@@ -10,14 +10,12 @@ class MessagesController < ApplicationController
 
   def compare
 
-    #dodgy attempt to clean data
     @emoji_one = params[:emoji_one]
-    #@emoji_two = EmojiData.scan(params[:emoji][1])[0].render
+    emoji = @emoji_one.to_s
     @emoji_two = params[:emoji_two]
 
     first_totals = Message.daily_totals(@emoji_one)
     second_totals = Message.daily_totals(@emoji_two)
-
 
     @first_emo_zero = first_totals[0]
     @first_emo_one = first_totals[1]
@@ -27,30 +25,18 @@ class MessagesController < ApplicationController
     @second_emo_one = second_totals[1]
     @second_emo_two = second_totals[2]
 
-
   end
 
   def show
 
     @emoji = params[:emoji]
-    @message = Message.find_by(emoji: @emoji)
-    #totals = Message.daily_totals(@emoji)
     totals = Message.hourly_totals(@emoji)
-    #@trend = Message.single_trend(@emoji)
-
-
-    #@day_zero = totals[0]
-    #@day_one = totals[1]
-    #@day_two = totals[2]
 
     @hour_zero = totals[0]
     @hour_one = totals[1]
     @hour_two = totals[2]
-
-    #Put this in the Payment model
-    # Payment.recent(insert_emoji, 3)
-    # output a hash
-    # Here
+    @hour_three = totals[3]
+    @hour_four = totals[4]
 
     @recent = Message.last_hour.where(emoji: @emoji).limit(3)
     if @recent.first
@@ -71,11 +57,6 @@ class MessagesController < ApplicationController
       @third_actor = @recent.third.Payment.actor_name
       @third_target = @recent.third.Payment.target_name
     end
-
-
-
-    #@name = find_name(@emoji)
-
 
 
   end

@@ -21,24 +21,24 @@
 
 <div class="top-ten-list">
 <h3> Top Venmo Transactions <br>(Past Hour)</h3>
-<table class="table table-striped">
-  <tr>
-  <th scope="col">Rank</th>
-  <th scope="col">Emoji</th>
-  </tr>
-
-  <% @hourly_list.each_with_index do |emoji, i| %>
+  <table class="table table-striped">
     <tr>
-      <td>
-        <%= i + 1 %>
-      </td>
-      <td>
-        <%= link_to emoji[0], {:controller => "messages", :action => "show", :emoji => emoji[0]}, class: "listed-emoji"  %>
-      </td>
-
+    <th scope="col">Rank</th>
+    <th scope="col">Emoji</th>
     </tr>
-  <% end %>
-</table>
+
+    <% @hourly_list.each_with_index do |emoji, i| %>
+      <tr>
+        <td class="num">
+          <%= i + 1 %>
+        </td>
+        <td>
+          <%= link_to emoji[0], {:controller => "messages", :action => "show", :emoji => emoji[0]}, class: "listed-emoji"  %>
+        </td>
+
+      </tr>
+    <% end %>
+  </table>
 </div>
 </div>
 </div>

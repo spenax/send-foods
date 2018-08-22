@@ -35,7 +35,7 @@ def rand_emoji(num)
     emoji_array.push(every_emoji[rando].render)
     num = num - 1
   end
-  emoji_array
+  emoji_array.uniq
 end
 
 def hour_ago
